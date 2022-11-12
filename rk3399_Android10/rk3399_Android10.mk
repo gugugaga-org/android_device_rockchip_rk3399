@@ -27,6 +27,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, device/rockchip/rk3399/device.mk)
 $(call inherit-product, device/rockchip/common/device.mk)
 
+DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.configstore@1.1-service.xml
+
 #enable this for support f2fs with data partion
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
 
