@@ -14,42 +14,35 @@
 # limitations under the License.
 #
 
-# First lunching is Q, api_level is 29
-PRODUCT_SHIPPING_API_LEVEL := 29
-PRODUCT_FSTAB_TEMPLATE := $(LOCAL_PATH)/fstab.in
+# First lunching is T, api_level is 33
+PRODUCT_SHIPPING_API_LEVEL := 33
 PRODUCT_DTBO_TEMPLATE := $(LOCAL_PATH)/dt-overlay.in
 PRODUCT_BOOT_DEVICE := fe330000.sdhci
 include device/rockchip/common/build/rockchip/DynamicPartitions.mk
-include device/rockchip/rk3399/rk3399_Android10/BoardConfig.mk
+include device/rockchip/rk3399/rk3399_t/BoardConfig.mk
 include device/rockchip/common/BoardConfig.mk
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 # Inherit from those products. Most specific first.
 $(call inherit-product, device/rockchip/rk3399/device.mk)
 $(call inherit-product, device/rockchip/common/device.mk)
 
-DEVICE_MANIFEST_FILE += device/rockchip/common/manifests/android.hardware.configstore@1.1-service.xml
-
-#enable this for support f2fs with data partion
-BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
-
 PRODUCT_CHARACTERISTICS := tablet
 
-PRODUCT_NAME := rk3399_Android10
-PRODUCT_DEVICE := rk3399_Android10
+PRODUCT_NAME := rk3399_t
+PRODUCT_DEVICE := rk3399_t
 PRODUCT_BRAND := rockchip
-PRODUCT_MODEL := rk3399-Android10
+PRODUCT_MODEL := rk3399_t
 PRODUCT_MANUFACTURER := rockchip
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 PRODUCT_PACKAGES += \
     SoundRecorder
 
+PRODUCT_PACKAGE_OVERLAYS += device/rockchip/rk3399/rk3399_t/overlay
 # Get the long list of APNs
 PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/spn-conf.xml:system/etc/spn-conf.xml
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.version = 1.0.0 \
-    ro.product.ota.host = 192.168.1.1 \
-    ro.sf.lcd_density=280
-
-#PRODUCT_HAVE_OPTEE := true
+    ro.product.ota.host = 192.168.1.1:8888 \
+    ro.sf.lcd_density=240

@@ -9,7 +9,7 @@ CAMERA_SUPPORT_AUTOFOCUS:= false
 
 BOARD_CAMERA_SUPPORT := true
 BOARD_CAMERA_SUPPORT_EXT := true
-PRODUCT_KERNEL_DTS := rk3399-evb-ind-lpddr4-android-avb
+PRODUCT_KERNEL_DTS := rk3399-evb-ind-lpddr4-v13-android-avb
 
 # AB image definition
 BOARD_USES_AB_IMAGE := false
@@ -18,5 +18,5 @@ BOARD_HAS_RK_4G_MODEM := false
 
 ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
     include device/rockchip/common/BoardConfig_AB.mk
-    TARGET_RECOVERY_FSTAB := device/rockchip/rk3399/rk3399_Android12/recovery.fstab_AB
+    TARGET_RECOVERY_FSTAB := device/rockchip/rk3399/rk3399_t/recovery.fstab_AB
 endif

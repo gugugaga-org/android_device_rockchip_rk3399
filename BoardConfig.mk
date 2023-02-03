@@ -17,7 +17,6 @@
 # Use the non-open-source parts, if they're present
 -include vendor/rockchip/rk3399/BoardConfigVendor.mk
 
-CURRENT_SDK_VERSION := RK3399_ANDROID10.0_MID_V1.0
 
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -34,7 +33,7 @@ TARGET_2ND_CPU_VARIANT := cortex-a15
 
 PRODUCT_KERNEL_ARCH := arm64
 PRODUCT_KERNEL_DTS ?= rk3399-sapphire-excavator-edp-avb
-PRODUCT_KERNEL_CONFIG ?= rockchip_defconfig
+PRODUCT_KERNEL_CONFIG ?= rockchip_defconfig rk3399.config
 PRODUCT_UBOOT_CONFIG ?= rk3399
 
 SF_PRIMARY_DISPLAY_ORIENTATION := 0
@@ -57,7 +56,7 @@ TARGET_USES_64_BIT_BCMDHD := true
 TARGET_USES_64_BIT_BINDER := true
 # BOARD_USE_AFBC_LAYER := true
 
-PRODUCT_KERNEL_VERSION := 4.19
+PRODUCT_KERNEL_VERSION := 5.10
 
 # HACK: Build apps as 64b for volantis_64_only
 ifneq (,$(filter ro.zygote=zygote64, $(PRODUCT_DEFAULT_PROPERTY_OVERRIDES)))
@@ -106,7 +105,7 @@ BOARD_TEMPERATURE_SENSOR_SUPPORT := false
 BOARD_USB_HOST_SUPPORT := true
 
 #for optee support
-PRODUCT_HAVE_OPTEE ?= true
+PRODUCT_HAVE_OPTEE ?= false
 BOARD_USE_SPARSE_SYSTEM_IMAGE := true
 
 # Google Service and frp overlay
