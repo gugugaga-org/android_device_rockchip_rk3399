@@ -35,7 +35,7 @@ PRODUCT_PACKAGES += \
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 
 # used for fstab_generator, sdmmc controller address
-PRODUCT_SDMMC_DEVICE := fe320000.dwmmc
+PRODUCT_SDMMC_DEVICE := fe320000.mmc
 
 # This ensures the needed build tools are available.
 # TODO: make non-linux builds happy with external/f2fs-tool; system/extras/f2fs_utils
