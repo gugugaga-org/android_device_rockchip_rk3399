@@ -1,10 +1,6 @@
 /dts-v1/;
 /plugin/;
 
-&chosen {
-    bootargs_ext = "androidboot.boot_devices=${_boot_device}";
-};
-
 &reboot_mode {
     mode-bootloader = <0x5242C309>;
     mode-charge = <0x5242C30B>;
