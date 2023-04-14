@@ -138,6 +138,7 @@ BOARD_HS_ETHERNET := true
 
 # for dynamaic afbc target 
 BOARD_HS_DYNAMIC_AFBC_TARGET := false
+TARGET_RK_GRALLOC_AIDL := true
 TARGET_RK_GRALLOC_VERSION := 4
 
 # Allow deprecated BUILD_ module types to get DDK building
