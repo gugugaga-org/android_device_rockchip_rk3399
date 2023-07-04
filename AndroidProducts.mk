@@ -15,8 +15,8 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/rk3399_t/rk3399_t.mk \
+    $(LOCAL_DIR)/rk3399_u/rk3399_u.mk \
 
 COMMON_LUNCH_CHOICES := \
-    rk3399_t-userdebug \
-    rk3399_t-user \
+    rk3399_u-userdebug \
+    rk3399_u-user \

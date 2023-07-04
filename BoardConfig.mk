@@ -107,7 +107,7 @@ BOARD_TEMPERATURE_SENSOR_SUPPORT := false
 BOARD_USB_HOST_SUPPORT := true
 
 #for optee support
-PRODUCT_HAVE_OPTEE ?= true
+PRODUCT_HAVE_OPTEE ?= false
 BOARD_USE_SPARSE_SYSTEM_IMAGE := true
 
 # Google Service and frp overlay

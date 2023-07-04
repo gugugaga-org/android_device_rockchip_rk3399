@@ -19,7 +19,7 @@ PRODUCT_SHIPPING_API_LEVEL := 33
 PRODUCT_DTBO_TEMPLATE := $(LOCAL_PATH)/dt-overlay.in
 PRODUCT_BOOT_DEVICE := fe330000.sdhci
 include device/rockchip/common/build/rockchip/DynamicPartitions.mk
-include device/rockchip/rk3399/rk3399_t/BoardConfig.mk
+include device/rockchip/rk3399/rk3399_u/BoardConfig.mk
 include device/rockchip/common/BoardConfig.mk
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 # Inherit from those products. Most specific first.
@@ -28,17 +28,17 @@ $(call inherit-product, device/rockchip/common/device.mk)
 
 PRODUCT_CHARACTERISTICS := tablet
 
-PRODUCT_NAME := rk3399_t
-PRODUCT_DEVICE := rk3399_t
+PRODUCT_NAME := rk3399_u
+PRODUCT_DEVICE := rk3399_u
 PRODUCT_BRAND := rockchip
-PRODUCT_MODEL := rk3399_t
+PRODUCT_MODEL := rk3399_u
 PRODUCT_MANUFACTURER := rockchip
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 PRODUCT_PACKAGES += \
     SoundRecorder
 
-PRODUCT_PACKAGE_OVERLAYS += device/rockchip/rk3399/rk3399_t/overlay
+PRODUCT_PACKAGE_OVERLAYS += device/rockchip/rk3399/rk3399_u/overlay
 # Get the long list of APNs
 PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/spn-conf.xml:system/etc/spn-conf.xml

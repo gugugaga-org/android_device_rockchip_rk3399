@@ -18,5 +18,5 @@ BOARD_HAS_RK_4G_MODEM := false
 
 ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
     include device/rockchip/common/BoardConfig_AB.mk
-    TARGET_RECOVERY_FSTAB := device/rockchip/rk3399/rk3399_t/recovery.fstab_AB
+    TARGET_RECOVERY_FSTAB := device/rockchip/rk3399/rk3399_u/recovery.fstab_AB
 endif
