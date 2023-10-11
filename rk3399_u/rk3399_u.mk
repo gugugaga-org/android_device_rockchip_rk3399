@@ -17,7 +17,7 @@
 # First lunching is U, api_level is 34
 PRODUCT_SHIPPING_API_LEVEL := 34
 PRODUCT_DTBO_TEMPLATE := $(LOCAL_PATH)/dt-overlay.in
-PRODUCT_BOOT_DEVICE := fe330000.mmc
+PRODUCT_BOOT_DEVICE := fe330000.sdhci
 include device/rockchip/common/build/rockchip/DynamicPartitions.mk
 include device/rockchip/rk3399/rk3399_u/BoardConfig.mk
 include device/rockchip/common/BoardConfig.mk
