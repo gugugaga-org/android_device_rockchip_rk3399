@@ -17,6 +17,9 @@
 # Use the non-open-source parts, if they're present
 -include vendor/rockchip/rk3399/BoardConfigVendor.mk
 
+# RK3399 freezes on Android 14 + Linux 6.1, here set to 34 U,
+# From now on, this property should never be changed.
+BOARD_SHIPPING_API_LEVEL := 34
 
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
