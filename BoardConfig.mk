@@ -36,7 +36,11 @@ TARGET_2ND_CPU_VARIANT := cortex-a15
 
 PRODUCT_KERNEL_ARCH := arm64
 PRODUCT_KERNEL_DTS ?= rk3399-sapphire-excavator-edp-avb
+ifeq ($(BOARD_BUILD_GKI),true)
+PRODUCT_KERNEL_CONFIG += rk3399_gki.config
+else
 PRODUCT_KERNEL_CONFIG += rk3399.config
+endif
 PRODUCT_UBOOT_CONFIG ?= rk3399_defconfig
 
 SF_PRIMARY_DISPLAY_ORIENTATION := 0
