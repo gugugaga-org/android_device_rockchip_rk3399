@@ -12,3 +12,11 @@ PRODUCT_KERNEL_DTS := rk3399-evb-ind-lpddr4-v13-android-avb
 
 BOARD_HAS_RK_4G_MODEM := false
 include device/rockchip/rk3399/BoardConfig.mk
+
+#64-bit only
+DEVICE_IS_64BIT_ONLY := true
+TARGET_2ND_ARCH :=
+TARGET_2ND_ARCH_VARIANT :=
+TARGET_2ND_CPU_ABI :=
+TARGET_2ND_CPU_ABI2 :=
+TARGET_2ND_CPU_VARIANT :=
