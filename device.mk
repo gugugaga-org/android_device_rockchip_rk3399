@@ -151,7 +151,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
                 ro.audio.monitorOrientation=true \
                 debug.nfc.fw_download=false \
                 debug.nfc.se=false \
-                ro.rk.screenoff_time=60000 \
                 ro.rk.screenshot_enable=true \
                 ro.rk.def_brightness=200 \
                 ro.rk.homepage_base=http://www.google.com/webhp?client={CID}&amp;source=android-home \
