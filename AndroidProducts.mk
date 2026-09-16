@@ -16,7 +16,9 @@
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/rk3399_u/rk3399_u.mk \
+    lineage_rk3399_tpm312:$(LOCAL_DIR)/rk3399_tpm312/rk3399_tpm312.mk \
 
 COMMON_LUNCH_CHOICES := \
     rk3399_u-userdebug \
-    rk3399_u-user \
+    lineage_rk3399_tpm312-userdebug \
+    lineage_rk3399_tpm312-user
