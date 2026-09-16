@@ -17,6 +17,7 @@ genfscon sysfs /devices/platform/ff660000.rkvdec/wakeup u:object_r:sysfs_wakeup:
 genfscon sysfs /devices/platform/ff680000.rga/wakeup    u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/ff770000.syscon/ff770000.syscon:usb2-phy@e460/extcon   u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/gpio-keys/wakeup       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/gpio-keys-extra/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/usb@fe800000/fe800000.dwc3/wakeup      u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/usb@fe900000/fe900000.dwc3/wakeup      u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/virtual/power_supply/test_ac    u:object_r:sysfs_batteryinfo:s0
@@ -25,3 +26,5 @@ genfscon sysfs /devices/virtual/power_supply/test_battery       u:object_r:sysfs
 genfscon sysfs /devices/virtual/power_supply/test_battery/wakeup10      u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/virtual/power_supply/test_usb   u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/virtual/power_supply/test_usb/wakeup11  u:object_r:sysfs_wakeup:s0
+# Kernel 4.19 on TPM312 numbers this wakeup node as wakeup9.
+genfscon sysfs /devices/virtual/power_supply/test_usb/wakeup9   u:object_r:sysfs_wakeup:s0

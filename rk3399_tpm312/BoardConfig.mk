@@ -8,6 +8,11 @@
 # Rockchip product-type detection does not default to "tablet".
 TARGET_BOARD_PLATFORM_PRODUCT := box
 
+# TPM312 is shipped with a real enforcing SELinux policy.  Keep this product
+# override here because the shared Rockchip BSP defaults to permissive for
+# legacy boards that have not completed their policy migration.
+BOARD_SELINUX_ENFORCING := true
+
 include device/rockchip/rk3399/BoardConfig.mk
 # Rockchip vendor policy owns the fuseblk label used by this BSP.
 TARGET_HAS_FUSEBLK_SEPOLICY_ON_VENDOR := true

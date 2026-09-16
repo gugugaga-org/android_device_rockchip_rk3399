@@ -43,12 +43,6 @@ on zygote-start
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
     chown wifi wifi /sys/module/bcmdhd/parameters/firmware_path
 
-# for nfc
-    chmod 0660 /dev/bcm2079x
-    chown nfc nfc /dev/bcm2079x
-    mkdir /data/nfc 0700 nfc nfc encryption=Require
-    mkdir /data/nfc/param 0700 nfc nfc encryption=Require
-
 on property:wlan.driver.status=ok
     chown wifi wifi /sys/module/bcmdhd/parameters/firmware_path
     chown wifi wifi /sys/module/bcmdhd/parameters/nvram_path

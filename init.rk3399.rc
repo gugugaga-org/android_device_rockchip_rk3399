@@ -48,9 +48,6 @@ on boot
     #write /sys/devices/system/cpu/cpufreq/policy4/interactive/target_loads "65 1008000:70 1200000:75 1416000:80 1608000:90"
     #ioprio rt 4
 
-    # reduce schedul time to improve io performance
-    write /sys/kernel/debug/sched_features NO_ENERGY_AWARE
-
 on init
     chown root root /sys/class/devfreq/dmc/system_status
     chmod 0666 /sys/class/devfreq/dmc/system_status
