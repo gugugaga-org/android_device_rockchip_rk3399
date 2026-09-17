@@ -37,6 +37,15 @@ PRODUCT_KERNEL_DTS ?= rk3399-sapphire-excavator-edp-avb
 PRODUCT_KERNEL_CONFIG ?= rockchip_defconfig
 PRODUCT_UBOOT_CONFIG ?= rk3399
 
+# Build the kernel with the GNU target instead of the GCC-era
+# aarch64-linux-android- prefix that Lineage's kernel task defaults to.
+# With --target=aarch64-linux-android clang emits the userspace TLS stack
+# canary (mrs tpidr_el0), which is invalid in kernel mode: the task's boot
+# image never reaches userspace and its modules oops on load (for example
+# rtw_drv_init in 8821cu).  The GNU target uses the global canary, which is
+# what the Rockchip build script and the verified TPM312 kernel builds use.
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-gnu-
+
 SF_PRIMARY_DISPLAY_ORIENTATION := 0
 
 BOARD_AVB_ENABLE := false
