@@ -35,7 +35,7 @@ DEVICE_MANIFEST_FILE := device/rockchip/rk3399/rk3399_tpm312/manifest.xml
 TARGET_RK_GRALLOC_VERSION := 4
 TARGET_KERNEL_SOURCE := kernel/rockchip/rk3399
 PRODUCT_KERNEL_PATH := kernel/rockchip/rk3399
-TARGET_KERNEL_CONFIG := rockchip_defconfig
+TARGET_KERNEL_CONFIG := rockchip_defconfig tpm312_kernelsu.config
 TARGET_KERNEL_DTB := rockchip/rk3399-tpm312.dtb
 BOARD_KERNEL_IMAGE_NAME := Image
 
