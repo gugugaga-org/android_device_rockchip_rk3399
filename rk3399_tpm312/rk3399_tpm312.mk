@@ -118,6 +118,17 @@ BOARD_KERNEL_CMDLINE += earlycon=uart8250,mmio32,0xff1a0000
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
     device/rockchip/rk3399/rk3399_tpm312/compatibility_matrix.xml
 
+# The Android 14 Rockchip audio BSP installs android.hardware.audio@7.1-impl
+# because the shared manifest (manifests/manifest_level_34.xml) declares
+# IDevicesFactory 7.1.  TPM312 keeps its own device manifest at target-level 6,
+# and FCM 6 only lists IDevicesFactory 6.0 and 7.0, so the product declares 7.0
+# and must ship the matching passthrough implementation.  libhidlbase refuses
+# to register a HIDL service that is not in the device manifest, so without the
+# 7.0 impl the audio HAL never registers, aborts with "Could not register Audio
+# Core API" and its crash loop keeps the system from finishing boot.
+PRODUCT_PACKAGES += \
+    android.hardware.audio@7.0-impl
+
 PRODUCT_CHARACTERISTICS := tv
 
 # The lineage_ prefix makes envsetup export LINEAGE_BUILD and enables the
