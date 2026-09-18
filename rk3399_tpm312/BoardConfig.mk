@@ -18,6 +18,11 @@ include device/rockchip/rk3399/BoardConfig.mk
 TARGET_HAS_FUSEBLK_SEPOLICY_ON_VENDOR := true
 BOARD_SEPOLICY_M4DEFS += board_excludes_fuseblk_sepolicy=true
 
+# The Rockchip BSP still uses its prebuilt module plugin for OP-TEE and
+# vendor binary packaging. Android 14 requires this legacy plugin to be
+# explicitly allowlisted during the migration.
+BUILD_BROKEN_PLUGIN_VALIDATION += soong-rockchip_prebuilt
+
 # TPM312 uses the public Realtek HAL for its RTL8821CU USB combo.
 BOARD_WIFI_VENDOR := realtek
 
