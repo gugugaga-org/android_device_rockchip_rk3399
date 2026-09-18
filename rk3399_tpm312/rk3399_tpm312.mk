@@ -68,6 +68,10 @@ $(call inherit-product, device/google/atv/products/atv_base.mk)
 WITH_GMS ?= true
 $(call inherit-product, vendor/lineage/config/common_full_tv.mk)
 
+# KernelSU Manager is independent of GApps and has no second GApps switch.
+# WITH_GMS only selects the MindTheGapps Android TV package above.
+$(call inherit-product, vendor/mtgapps/mtgapps.mk)
+
 # The stock Lineage TV wizard starts with Bluetooth accessory discovery.  TPM312
 # has no bundled Bluetooth remote, so replace only the wizard script through a
 # device overlay and begin with the normal welcome page.  The Bluetooth setup
