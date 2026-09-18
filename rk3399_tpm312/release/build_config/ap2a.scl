@@ -1,0 +1,9 @@
+load("//build/make/core/release_config.scl", "value")
+
+values = [
+    value("RELEASE_DEPRECATE_VNDK", False),
+    # Keep the platform's AP2A VNDK level.  Forcing this to 34 makes Soong
+    # combine current libraries with the prebuilt v34 LLNDK list, which lacks
+    # newer dependencies such as libapexsupport.so.
+    value("RELEASE_PLATFORM_VNDK_VERSION", "35"),
+]

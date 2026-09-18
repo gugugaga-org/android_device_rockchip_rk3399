@@ -5,8 +5,14 @@
 # this device repository.
 
 PRODUCT_SHIPPING_API_LEVEL := 34
+# Android 14's release configuration keeps the platform VNDK APEX available
+# under its API-34 name.  Rockchip's prebuilt Mali DDK resolves
+# libutilscallstack.so from that namespace; do not copy private system
+# libraries into vendor as a workaround.
 PRODUCT_DTBO_TEMPLATE := $(LOCAL_PATH)/dt-overlay.in
 PRODUCT_BOOT_DEVICE := fe330000.sdhci
+PRODUCT_RELEASE_CONFIG_MAPS += \
+    device/rockchip/rk3399/rk3399_tpm312/release_config_map.mk
 
 include device/rockchip/common/build/rockchip/DynamicPartitions.mk
 include device/rockchip/rk3399/rk3399_tpm312/BoardConfig.mk

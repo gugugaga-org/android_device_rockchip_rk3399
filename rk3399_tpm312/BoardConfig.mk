@@ -8,6 +8,12 @@
 # Rockchip product-type detection does not default to "tablet".
 TARGET_BOARD_PLATFORM_PRODUCT := box
 
+# Rockchip's prebuilt Mali DDK links against the VNDK-SP
+# libutilscallstack.so. Keep the Android U VNDK namespace available so the
+# system EGL loader can resolve that dependency from the sphal namespace;
+# do not copy private platform libraries into vendor as a workaround.
+KEEP_VNDK := true
+
 # TPM312 is shipped with a real enforcing SELinux policy.  Keep this product
 # override here because the shared Rockchip BSP defaults to permissive for
 # legacy boards that have not completed their policy migration.
