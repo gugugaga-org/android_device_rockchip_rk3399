@@ -43,6 +43,21 @@ PRODUCT_KERNEL_CONFIG += rk3399.config
 endif
 PRODUCT_UBOOT_CONFIG ?= rk3399_defconfig
 
+# Build the kernel with the GNU target instead of the GCC-era
+# aarch64-linux-android- prefix that Lineage's kernel task defaults to.
+# With --target=aarch64-linux-android clang emits the userspace TLS stack
+# canary (mrs tpidr_el0), which is invalid in kernel mode: the task's boot
+# image never reaches userspace and its modules oops on load (for example
+# rtw_drv_init in 8821cu).  The GNU target uses the global canary, which is
+# what the Rockchip build script and the verified TPM312 kernel builds use.
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-gnu-
+# Keep the TPM312 4.19 kernel on the Android Clang 14.0.6 prebuilt that the
+# verified TPM312 boot image and modules were built with.  The result is
+# recorded in the kernel release string (4.19.232-clang14.0.6); building the
+# kernel with a different Clang prebuilt mixes compiler generations between a
+# boot image and its modules and invalidates the earlier verification.
+TARGET_KERNEL_CLANG_VERSION := r450784d
+
 SF_PRIMARY_DISPLAY_ORIENTATION := 0
 
 BOARD_AVB_ENABLE := false
