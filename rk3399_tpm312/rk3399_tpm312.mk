@@ -1,10 +1,10 @@
-# TPM312 product for LineageOS 20 (Android 13).
+# TPM312 product for LineageOS 21 (Android 14).
 #
-# The board uses the existing MindTheGapps ATV prebuilt set for the first
-# Android 13 image.  The APK blobs remain outside Git; set TPM312_WITH_GAPPS=
-# false for a minimal bring-up image.
+# Android TV GApps are selected through Lineage's standard WITH_GMS switch.
+# The MindTheGapps tree is an external manifest project and remains outside
+# this device repository.
 
-PRODUCT_SHIPPING_API_LEVEL := 33
+PRODUCT_SHIPPING_API_LEVEL := 34
 PRODUCT_DTBO_TEMPLATE := $(LOCAL_PATH)/dt-overlay.in
 PRODUCT_BOOT_DEVICE := fe330000.sdhci
 
@@ -48,7 +48,7 @@ WIFI_DRIVER_FW_PATH_STA := /dev/null
 WIFI_DRIVER_FW_PATH_AP := /dev/null
 WIFI_DRIVER_FW_PATH_P2P := /dev/null
 WIFI_DRIVER_FW_PATH_PARAM := /dev/null
-# Android 13 builds libwifi-hal-common from Android.bp. Export the two
+# Android 14 builds libwifi-hal-common from Android.bp. Export the two
 # device-specific loader values through Soong without changing the generic
 # WiFi framework defaults for other boards.
 SOONG_CONFIG_NAMESPACES += tpm312Wifi
@@ -63,6 +63,9 @@ BOARD_WITH_RKTOOLBOX := false
 # LineageOS/AOSP 64-bit userspace with the 32-bit secondary ABI supplied by
 # the RK3399 BoardConfig.
 $(call inherit-product, device/google/atv/products/atv_base.mk)
+# Keep this as the only product-level GApps switch. vendor/lineage's
+# partner_gms.mk resolves WITH_GMS to vendor/gapps_tv for this manifest.
+WITH_GMS ?= true
 $(call inherit-product, vendor/lineage/config/common_full_tv.mk)
 
 # The stock Lineage TV wizard starts with Bluetooth accessory discovery.  TPM312
@@ -73,8 +76,8 @@ TPM312_SETUPWIZARD_OVERLAY := device/rockchip/rk3399/rk3399_tpm312/overlay
 PRODUCT_PACKAGE_OVERLAYS += $(TPM312_SETUPWIZARD_OVERLAY)
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(TPM312_SETUPWIZARD_OVERLAY)
 
-# Rockchip's Android 12 BSP projects are the hardware donor for this first
-# Android 13 port.  Their compatibility fixes are kept in separate patches.
+# Rockchip's Android 14 BSP projects are the hardware donor for this port.
+# TPM312 compatibility fixes are kept in project-local commits.
 $(call inherit-product, device/rockchip/rk3399/device.mk)
 $(call inherit-product, device/rockchip/common/device.mk)
 
@@ -83,32 +86,17 @@ $(call inherit-product, device/rockchip/common/device.mk)
 # RTL8821CU; use the Realtek implementation as the HIDL default
 # libbt-vendor.so and do not retain its differently-named staging module.
 BOARD_HAVE_BLUETOOTH_BCM := false
-PRODUCT_PACKAGES := $(filter-out libbt-vendor-realtek,$(PRODUCT_PACKAGES))
 
 # Keep the RK3399 UART visible during the handoff from U-Boot to Linux.  This
 # is board-local diagnostic configuration and makes early kernel failures
 # distinguishable from an Android ramdisk failure.
 BOARD_KERNEL_CMDLINE += earlycon=uart8250,mmio32,0xff1a0000
 
-# Keep the proprietary GApps integration opt-out-able without changing the
-# LineageOS platform tree.  The userdebug build also carries the existing
-# development-only KernelSU Manager entry from mtgapps.mk.
-TPM312_WITH_GAPPS ?= true
-ifeq ($(TPM312_WITH_GAPPS),true)
-$(call inherit-product, vendor/mtgapps/mtgapps.mk)
-endif
-
-# The Android 13 WiFi stack uses AIDL hostapd/supplicant and HIDL WiFi 1.6.
+# The Android 14 WiFi stack uses AIDL hostapd/supplicant and HIDL WiFi 1.6.
 # They are valid for this Android 12-origin device but are not listed in FCM 6,
 # so declare them in a board-specific framework compatibility matrix.
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
     device/rockchip/rk3399/rk3399_tpm312/compatibility_matrix.xml
-
-# The common Rockchip package wrapper pulls every vendor WiFi HAL.  TPM312
-# selects the public Realtek HAL directly and does not need that wrapper.
-# RkDeviceTest still targets the removed Android 12 EthernetManager listener
-# API, so leave this optional factory-test application out of the A13 image.
-PRODUCT_PACKAGES := $(filter-out libwifi-hal-package RKDeviceTest,$(PRODUCT_PACKAGES))
 
 PRODUCT_CHARACTERISTICS := tv
 
@@ -153,7 +141,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # The common Rockchip property block is skipped for TPM312 by the overlay
 # patch, so this remains the only screen-off assignment for the product.
 PRODUCT_PROPERTY_OVERRIDES += ro.rk.screenoff_time=2147483647
-
-# Keep this final because inherited product lists append these entries after
-# the common device configuration is evaluated.
-PRODUCT_PACKAGES := $(filter-out RKDeviceTest libbt-vendor-realtek,$(PRODUCT_PACKAGES))
