@@ -86,6 +86,8 @@ $(call inherit-product, device/rockchip/common/device.mk)
 # RTL8821CU; use the Realtek implementation as the HIDL default
 # libbt-vendor.so and do not retain its differently-named staging module.
 BOARD_HAVE_BLUETOOTH_BCM := false
+BOARD_HAVE_BLUETOOTH_AIC :=
+BOARD_HAVE_BLUETOOTH_SEEKWAVE :=
 
 # Keep the RK3399 UART visible during the handoff from U-Boot to Linux.  This
 # is board-local diagnostic configuration and makes early kernel failures
