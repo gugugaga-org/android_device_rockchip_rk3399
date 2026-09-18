@@ -12,6 +12,14 @@ include device/rockchip/common/build/rockchip/DynamicPartitions.mk
 include device/rockchip/rk3399/rk3399_tpm312/BoardConfig.mk
 include device/rockchip/common/BoardConfig.mk
 
+# The shared Android 14 Rockchip BoardConfig enables the HWC3 AIDL path, but
+# RK3399's Android 14 graphics stack still supplies the legacy HWC2 service
+# together with hwcomposer.rk30board.so.  There is no
+# android.hardware.graphics.composer3-service.rockchip module in this source
+# tree, so leave HWC3 disabled for TPM312 or SurfaceFlinger has no composer
+# service to connect to and aborts during early boot.
+TARGET_USES_HWC3_AIDL := false
+
 # The common BoardConfig resets these vendor selectors to the Rockchip
 # auto-HAL defaults, so keep the board-specific Realtek selection after it.
 BOARD_WIFI_VENDOR := realtek
