@@ -148,9 +148,15 @@ PRODUCT_COPY_FILES += \
     vendor/rockchip/common/phone/etc/spn-conf.xml:system/etc/spn-conf.xml
 
 # RTL8821CU firmware (WiFi + BT share the same RTL8821C firmware files).
+#
+# Android 15 installs a vendor PRODUCT_COPY_FILES entry that targets
+# etc/firmware into /vendor/firmware: fsgen turns each destination directory
+# into a generated prebuilt_firmware module, and that module uses the "firmware"
+# base directory whenever it is soc_specific, which every vendor module is.  The
+# two destinations this product used to list therefore became two rules for the
+# same file and Soong rejected the vendor image with "packaging conflict at
+# firmware/rtl8821c_fw".  List the destination the file actually lands in.
 PRODUCT_COPY_FILES += \
-    device/rockchip/rk3399/rk3399_tpm312/firmware/rtl8821c_fw:$(TARGET_COPY_OUT_VENDOR)/etc/firmware/rtl8821c_fw \
-    device/rockchip/rk3399/rk3399_tpm312/firmware/rtl8821c_config:$(TARGET_COPY_OUT_VENDOR)/etc/firmware/rtl8821c_config \
     device/rockchip/rk3399/rk3399_tpm312/firmware/rtl8821c_fw:$(TARGET_COPY_OUT_VENDOR)/firmware/rtl8821c_fw \
     device/rockchip/rk3399/rk3399_tpm312/firmware/rtl8821c_config:$(TARGET_COPY_OUT_VENDOR)/firmware/rtl8821c_config
 
