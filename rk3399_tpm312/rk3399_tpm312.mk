@@ -99,13 +99,15 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(TPM312_SETUPWIZARD_OVERLAY)
 $(call inherit-product, device/rockchip/rk3399/device.mk)
 $(call inherit-product, device/rockchip/common/device.mk)
 
-# The common Rockchip configuration unconditionally selects the Broadcom
-# vendor library for its generic connectivity defaults.  TPM312 has a USB
-# RTL8821CU; use the Realtek implementation as the HIDL default
-# libbt-vendor.so and do not retain its differently-named staging module.
-BOARD_HAVE_BLUETOOTH_BCM := false
+# The common Bluetooth product fragment has already been inherited above.  Its
+# board defaults select Broadcom/AIC/Seekwave before this product can override
+# them, so select and include the TPM312 RTL8821CU implementation here.  The
+# resulting libbt-vendor.so is what the HIDL Bluetooth HAL dlopens at runtime.
+BOARD_HAVE_BLUETOOTH_BCM :=
 BOARD_HAVE_BLUETOOTH_AIC :=
 BOARD_HAVE_BLUETOOTH_SEEKWAVE :=
+BOARD_HAVE_BLUETOOTH_RTK := true
+$(call inherit-product, hardware/realtek/rtkbt/rtkbt.mk)
 
 # Keep the RK3399 UART visible during the handoff from U-Boot to Linux.  This
 # is board-local diagnostic configuration and makes early kernel failures
