@@ -20,11 +20,19 @@ genfscon sysfs /devices/platform/gpio-keys/wakeup       u:object_r:sysfs_wakeup:
 genfscon sysfs /devices/platform/gpio-keys-extra/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/usb@fe800000/fe800000.dwc3/wakeup      u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/usb@fe900000/fe900000.dwc3/wakeup      u:object_r:sysfs_wakeup:s0
+# A USB device that registers a wakeup source gets a "wakeup" directory holding
+# a run time numbered "wakeup<N>" child below its own port node.  The wireless
+# remote receiver of TPM312 is always enumerated as usb5/5-1, so label that
+# subtree; otherwise those two directories keep the generic sysfs label and
+# system_suspend cannot read the wakeup statistics.
+genfscon sysfs /devices/platform/usb@fe900000/fe900000.dwc3/xhci-hcd.5.auto/usb5/5-1/wakeup u:object_r:sysfs_wakeup:s0
+# Kernel 4.19 exposes the wakeup statistics of a power supply in a child device
+# of that supply and numbers it "wakeup<N>" at run time, so a fixed number can
+# never match.  The wakeup node of test_ac is wakeup7 and that of test_battery
+# is wakeup8, but label the whole wakeup subtree of every supply instead.
 genfscon sysfs /devices/virtual/power_supply/test_ac    u:object_r:sysfs_batteryinfo:s0
-genfscon sysfs /devices/virtual/power_supply/test_ac/wakeup9    u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/power_supply/test_ac/wakeup     u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/virtual/power_supply/test_battery       u:object_r:sysfs_batteryinfo:s0
-genfscon sysfs /devices/virtual/power_supply/test_battery/wakeup10      u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/power_supply/test_battery/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/virtual/power_supply/test_usb   u:object_r:sysfs_batteryinfo:s0
-genfscon sysfs /devices/virtual/power_supply/test_usb/wakeup11  u:object_r:sysfs_wakeup:s0
-# Kernel 4.19 on TPM312 numbers this wakeup node as wakeup9.
-genfscon sysfs /devices/virtual/power_supply/test_usb/wakeup9   u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/power_supply/test_usb/wakeup    u:object_r:sysfs_wakeup:s0
