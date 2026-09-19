@@ -1,0 +1,17 @@
+# TPM312 keeps the Android 14 VNDK namespace intent from the LineageOS 21
+# release config: Rockchip's prebuilt Mali DDK links against the VNDK-SP
+# libutilscallstack.so, so the platform VNDK must not be deprecated for this
+# product.
+#
+# The LineageOS 22.2 release train (bp1a) defaults this flag to true.  TPM312
+# pins it to false to keep the Android 14 namespace contract explicit.
+#
+# Android 15 removed the plumbing that used to consume this flag (KEEP_VNDK and
+# PLATFORM_VNDK_VERSION are gone from build/make and no VNDK APEX module exists
+# any more), so today it records the requirement instead of switching it on.
+# The Mali DDK dependency has to be resolved by the graphics bring-up; do not
+# copy private platform libraries into vendor as a workaround.
+name: "RELEASE_DEPRECATE_VNDK"
+value: {
+  bool_value: false
+}

@@ -9,9 +9,16 @@
 TARGET_BOARD_PLATFORM_PRODUCT := box
 
 # Rockchip's prebuilt Mali DDK links against the VNDK-SP
-# libutilscallstack.so. Keep the Android U VNDK namespace available so the
-# system EGL loader can resolve that dependency from the sphal namespace;
-# do not copy private platform libraries into vendor as a workaround.
+# libutilscallstack.so.  Android 14 kept the VNDK namespace available through
+# KEEP_VNDK so that the system EGL loader could resolve that dependency from the
+# sphal namespace; do not copy private platform libraries into vendor as a
+# workaround.
+#
+# Android 15 removed the VNDK stack (build/make no longer reads KEEP_VNDK or
+# PLATFORM_VNDK_VERSION and there is no VNDK APEX to keep), so this variable is
+# inert here.  It is kept as the recorded requirement: the bring-up must
+# provide the DDK dependency another way and re-verify HDMI/display on device
+# before this product can ship.
 KEEP_VNDK := true
 
 # TPM312 is shipped with a real enforcing SELinux policy.  Keep this product
