@@ -1,18 +1,18 @@
-# TPM312 product for LineageOS 21 (Android 14).
+# TPM312 product for LineageOS 22.2 (Android 15).
 #
 # Android TV GApps are selected through Lineage's standard WITH_GMS switch.
 # The MindTheGapps tree is an external manifest project and remains outside
 # this device repository.
 
 PRODUCT_SHIPPING_API_LEVEL := 34
-# Android 14's release configuration keeps the platform VNDK APEX available
-# under its API-34 name.  Rockchip's prebuilt Mali DDK resolves
-# libutilscallstack.so from that namespace; do not copy private system
-# libraries into vendor as a workaround.
 PRODUCT_DTBO_TEMPLATE := $(LOCAL_PATH)/dt-overlay.in
 PRODUCT_BOOT_DEVICE := fe330000.sdhci
+# Android 15 reads only protobuf release-config maps, so the product registers
+# the map next to the release_configs/ and flag_values/ directories that carry
+# the bp1a flag values (including the VNDK intent for Rockchip's
+# prebuilt Mali DDK).  See release/release_config_map.textproto.
 PRODUCT_RELEASE_CONFIG_MAPS += \
-    device/rockchip/rk3399/rk3399_tpm312/release_config_map.mk
+    device/rockchip/rk3399/rk3399_tpm312/release/release_config_map.textproto
 
 include device/rockchip/common/build/rockchip/DynamicPartitions.mk
 include device/rockchip/rk3399/rk3399_tpm312/BoardConfig.mk

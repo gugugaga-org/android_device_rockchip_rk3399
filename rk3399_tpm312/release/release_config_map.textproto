@@ -1,0 +1,20 @@
+# TPM312 release-config contribution map.
+#
+# Android 15 only reads protobuf release-config maps:
+# build/make/core/release_config.mk sets _must_protobuf := true and requires a
+# release_config_map.textproto next to every release_configs/ and flag_values/
+# directory a product registers.  The legacy Android 14 map
+# (release_config_map.mk plus release/build_config/ap2a.scl) is no longer
+# parsed, so this product's contribution lives here now.
+#
+# A map's own directory is its contribution root: the release-config tool reads
+# <this dir>/release_configs/<release>.textproto and
+# <this dir>/flag_values/<release>/<FLAG>.textproto from it.
+#
+# The release name has to match the one the lunch target selects.  LineageOS
+# 22.2 builds the bp1a train (vendor/lineage/vars/aosp_target_release), so the
+# contribution directory is flag_values/bp1a/.
+default_containers: "product"
+default_containers: "system"
+default_containers: "system_ext"
+default_containers: "vendor"

@@ -1,0 +1,15 @@
+# Android 15 requires one release config contribution per directory that
+# supplies flag values, and its name must match the flag_values/ subdirectory.
+#
+# TPM312 follows the LineageOS 22.2 release train.  LineageOS selects it in
+# vendor/lineage/vars/aosp_target_release, and bp1a is the only configuration in
+# this Android 15 tree that keeps the platform at API 35 with SDK extension 15
+# and the current security patch.  The retained ap2a configuration belongs to
+# the Android 14 train and would declare API 34 on an Android 15 platform, which
+# also leaves RELEASE_AVF_MICRODROID_KERNEL_VERSION unset and breaks the AVF
+# prebuilt filegroups.
+#
+# The platform's own build/release/release_configs/bp1a.textproto owns the
+# aconfig value sets and the platform flag values; this file only declares this
+# product's contribution to the same release config.
+name: "bp1a"

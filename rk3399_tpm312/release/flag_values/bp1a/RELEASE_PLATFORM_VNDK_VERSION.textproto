@@ -1,0 +1,10 @@
+# Keep the VNDK level at 35 for the LineageOS 22.2 release train: pinning the
+# API-34 level makes Soong combine current libraries with the prebuilt v34 LLNDK
+# list, which lacks newer dependencies such as libapexsupport.so.
+#
+# The value matches the bp1a flag declaration default on Android 15, so this is
+# an explicit pin of the intended level rather than a behaviour change.
+name: "RELEASE_PLATFORM_VNDK_VERSION"
+value: {
+  string_value: "35"
+}
