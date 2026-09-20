@@ -134,6 +134,18 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@7.0-impl \
     libutilscallstack.vendor
 
+# The Rockchip KeyMint HAL keeps using its prebuilt libRkkeymint.so, which is
+# linked against the KeyMint V3 NDK AIDL library.  Android 15 moved the HAL
+# side to V4, so nothing pulls V3 into the vendor image any more and the
+# dynamic linker aborts vendor.keymint-default before main() (init reports an
+# exit with status 1, and keystore2 is then left without a KeyMint service).
+# Ask for the vendor variant explicitly - the unsuffixed module name selects
+# the /system library - and keep the dependency out of the HAL's own link
+# line, because the build system rejects one module that depends on two
+# versions of the same AIDL interface.
+PRODUCT_PACKAGES += \
+    android.hardware.security.keymint-V3-ndk.vendor
+
 PRODUCT_CHARACTERISTICS := tv
 
 # The lineage_ prefix makes envsetup export LINEAGE_BUILD and enables the
