@@ -86,6 +86,11 @@ CAMERA_SUPPORT_AUTOFOCUS := false
 
 # Non A/B, dynamic partitions (super)
 BOARD_USES_AB_IMAGE := false
+# Android 15 defaults AB_OTA_UPDATER to true when it is left unset.  That
+# makes lpmake suffix every logical partition with _a while this board's
+# first-stage fstab correctly names the non-A/B partitions without a suffix.
+# Keep the super metadata and fstab in the same non-A/B scheme.
+AB_OTA_UPDATER := false
 BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE := false
 BOARD_HAS_RK_4G_MODEM := false
 
