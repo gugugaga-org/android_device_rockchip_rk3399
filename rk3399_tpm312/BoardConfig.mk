@@ -49,11 +49,11 @@ TARGET_RECOVERY_FSTAB := device/rockchip/rk3399/rk3399_tpm312/recovery.fstab
 DEVICE_MANIFEST_FILE := device/rockchip/rk3399/rk3399_tpm312/manifest.xml
 # LineageOS builds the kernel from the repo-managed source checkout rather than
 # consuming the Rockchip BSP's prebuilt kernel path.
-# Use the HIDL Gralloc 4 path for RK3399's legacy HWC2 Midgard stack. The
-# common RK3399 BoardConfig selects the AIDL allocator by default, but
-# SurfaceFlinger still requests android.hardware.graphics.allocator@4.0 when
-# paired with this composer.
-TARGET_RK_GRALLOC_AIDL := false
+# Android 15's Gralloc5 client looks up the AIDL allocator service even while
+# RK3399 continues to use the legacy HIDL HWC2 composer. Keep the composer
+# selection below unchanged, but install the Rockchip AIDL allocator and its
+# VINTF fragment so SurfaceFlinger can allocate buffers.
+TARGET_RK_GRALLOC_AIDL := true
 TARGET_RK_GRALLOC_VERSION := 4
 TARGET_KERNEL_SOURCE := kernel/rockchip/rk3399
 PRODUCT_KERNEL_PATH := kernel/rockchip/rk3399
