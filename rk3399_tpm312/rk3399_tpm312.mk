@@ -146,6 +146,21 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.security.keymint-V3-ndk.vendor
 
+# The graphics allocator stays AIDL (TARGET_RK_GRALLOC_AIDL), but the mapper is
+# still Rockchip's HIDL passthrough mapper@4.0-impl, so libui builds the
+# Gralloc4 allocator wrapper.  That wrapper probes the HIDL allocator with
+# android.hardware.graphics.allocator@4.0::IAllocator::getService() *before* it
+# looks for the AIDL service, and libhidl keeps waiting for any interface the
+# device manifest declares over hwbinder.  This product declares that HIDL HAL
+# in rk3399_tpm312/manifest.xml, so with no service to answer the lookup
+# SurfaceFlinger blocks in SurfaceFlinger::init() forever, never registers
+# SurfaceFlingerAIDL and system_server restarts in a loop.  Install the HIDL
+# allocator next to the AIDL one: the AIDL service is what actually allocates
+# buffers, the HIDL service only has to exist and register.
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.allocator@4.0-impl-midgard \
+    android.hardware.graphics.allocator@4.0-service
+
 PRODUCT_CHARACTERISTICS := tv
 
 # The lineage_ prefix makes envsetup export LINEAGE_BUILD and enables the
