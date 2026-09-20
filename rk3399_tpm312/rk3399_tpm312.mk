@@ -127,9 +127,12 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
 # and must ship the matching passthrough implementation.  libhidlbase refuses
 # to register a HIDL service that is not in the device manifest, so without the
 # 7.0 impl the audio HAL never registers, aborts with "Could not register Audio
-# Core API" and its crash loop keeps the system from finishing boot.
+# Core API" and its crash loop keeps the system from finishing boot. The
+# Rockchip Mali DDK also needs the vendor variant of libutilscallstack: Android
+# 15 no longer exposes the Android 14 VNDK namespace that used to supply it.
 PRODUCT_PACKAGES += \
-    android.hardware.audio@7.0-impl
+    android.hardware.audio@7.0-impl \
+    libutilscallstack.vendor
 
 PRODUCT_CHARACTERISTICS := tv
 
