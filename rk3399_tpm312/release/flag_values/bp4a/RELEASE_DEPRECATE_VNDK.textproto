@@ -3,10 +3,10 @@
 # libutilscallstack.so, so the platform VNDK must not be deprecated for this
 # product.
 #
-# The LineageOS 22.2 release train (bp1a) defaults this flag to true.  TPM312
+# The LineageOS 23.2 release train (bp4a) defaults this flag to true.  TPM312
 # pins it to false to keep the Android 14 namespace contract explicit.
 #
-# Android 15 removed the plumbing that used to consume this flag (KEEP_VNDK and
+# Android 16 removed the plumbing that used to consume this flag (KEEP_VNDK and
 # PLATFORM_VNDK_VERSION are gone from build/make and no VNDK APEX module exists
 # any more), so today it records the requirement instead of switching it on.
 # The Mali DDK dependency has to be resolved by the graphics bring-up; do not
