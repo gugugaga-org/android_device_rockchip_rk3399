@@ -8,6 +8,11 @@
 # Rockchip product-type detection does not default to "tablet".
 TARGET_BOARD_PLATFORM_PRODUCT := box
 
+# Use the TPM312 fstab template: Android 16's shared Rockchip template enables
+# file and metadata encryption, whose fresh metadata-key generation crashes in
+# the vendor KeyMint. This product therefore leaves /data unencrypted.
+PRODUCT_FSTAB_TEMPLATE := device/rockchip/rk3399/rk3399_tpm312/fstab.in
+
 # Rockchip's prebuilt Mali DDK links against the VNDK-SP
 # libutilscallstack.so.  Android 14 kept the VNDK namespace available through
 # KEEP_VNDK so that the system EGL loader could resolve that dependency from the
