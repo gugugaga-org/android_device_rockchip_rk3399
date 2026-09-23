@@ -57,7 +57,7 @@ TARGET_RK_GRALLOC_AIDL := true
 TARGET_RK_GRALLOC_VERSION := 4
 TARGET_KERNEL_SOURCE := kernel/rockchip/rk3399
 PRODUCT_KERNEL_PATH := kernel/rockchip/rk3399
-TARGET_KERNEL_CONFIG := rockchip_defconfig tpm312_kernelsu.config
+TARGET_KERNEL_CONFIG := rockchip_defconfig tpm312_kernelsu.config tpm312_bpf.config
 TARGET_KERNEL_DTB := rockchip/rk3399-tpm312.dtb
 BOARD_KERNEL_IMAGE_NAME := Image
 
