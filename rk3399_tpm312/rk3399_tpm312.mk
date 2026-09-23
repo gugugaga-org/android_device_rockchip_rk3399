@@ -210,3 +210,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # The common Rockchip property block is skipped for TPM312 by the overlay
 # patch, so this remains the only screen-off assignment for the product.
 PRODUCT_PROPERTY_OVERRIDES += ro.rk.screenoff_time=2147483647
+
+# TEMPORARY diagnostic: let Android 16 try its 5.10-gated BPF programs on the
+# TPM312 ringbuf backport. This is an unverified capability claim, not a release
+# setting; validate ringbuf loading and related BPF programs on hardware.
+PRODUCT_PRODUCT_PROPERTIES += ro.bpf.kver_override=5.10.239
