@@ -143,6 +143,9 @@ PRODUCT_PACKAGES += \
 # The product selector above makes optee.mk install the AOSP software KeyMint
 # service with SOFTWARE security level. The Rockchip libRkkeymint prebuilt and
 # its KeyMint V3 NDK compatibility dependency are intentionally not selected.
+# Keep Rockchip's cppbor ABI library in vendor for the remaining vendor HALs,
+# even though the selected software KeyMint itself uses AOSP libcppbor.
+PRODUCT_PACKAGES += libRkcppbor_external
 
 # The graphics allocator stays AIDL (TARGET_RK_GRALLOC_AIDL), but the mapper is
 # still Rockchip's HIDL passthrough mapper@4.0-impl, so libui builds the
