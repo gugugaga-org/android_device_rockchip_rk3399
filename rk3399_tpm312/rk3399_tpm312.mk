@@ -1,8 +1,14 @@
-# TPM312 product for LineageOS 22.2 (Android 15).
+# TPM312 product for LineageOS 23.2 (Android 16).
 #
 # Android TV GApps are selected through Lineage's standard WITH_GMS switch.
 # The MindTheGapps tree is an external manifest project and remains outside
 # this device repository.
+
+# User-approved KeyMint fallback for this bring-up. Android data encryption
+# remains enabled, but KeyMint keys are software-only and have no TEE-backed
+# protection or hardware attestation. device/rockchip/common/modules/optee.mk
+# uses this selector while retaining OP-TEE for Gatekeeper and Weaver.
+TPM312_USE_SOFTWARE_KEYMINT := true
 
 PRODUCT_SHIPPING_API_LEVEL := 34
 PRODUCT_DTBO_TEMPLATE := $(LOCAL_PATH)/dt-overlay.in
@@ -134,17 +140,9 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@7.0-impl \
     libutilscallstack.vendor
 
-# The Rockchip KeyMint HAL keeps using its prebuilt libRkkeymint.so, which is
-# linked against the KeyMint V3 NDK AIDL library.  Android 15 moved the HAL
-# side to V4, so nothing pulls V3 into the vendor image any more and the
-# dynamic linker aborts vendor.keymint-default before main() (init reports an
-# exit with status 1, and keystore2 is then left without a KeyMint service).
-# Ask for the vendor variant explicitly - the unsuffixed module name selects
-# the /system library - and keep the dependency out of the HAL's own link
-# line, because the build system rejects one module that depends on two
-# versions of the same AIDL interface.
-PRODUCT_PACKAGES += \
-    android.hardware.security.keymint-V3-ndk.vendor
+# The product selector above makes optee.mk install the AOSP software KeyMint
+# service with SOFTWARE security level. The Rockchip libRkkeymint prebuilt and
+# its KeyMint V3 NDK compatibility dependency are intentionally not selected.
 
 # The graphics allocator stays AIDL (TARGET_RK_GRALLOC_AIDL), but the mapper is
 # still Rockchip's HIDL passthrough mapper@4.0-impl, so libui builds the
