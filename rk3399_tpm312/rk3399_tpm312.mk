@@ -212,7 +212,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # patch, so this remains the only screen-off assignment for the product.
 PRODUCT_PROPERTY_OVERRIDES += ro.rk.screenoff_time=2147483647
 
-# TEMPORARY diagnostic: let Android 16 try its 5.10-gated BPF programs on the
-# TPM312 ringbuf backport. This is an unverified capability claim, not a release
-# setting; validate ringbuf loading and related BPF programs on hardware.
+# TEMPORARY diagnostic: keep Android 16's global BPF/map gate at the 5.10
+# backport level, while Connectivity selects BPF program variants for TPM312's
+# actual 4.19 kernel because its skb GSO/socket context extensions are absent.
+# Neither property is a claim that every 5.10 BPF feature is implemented.
 PRODUCT_PRODUCT_PROPERTIES += ro.bpf.kver_override=5.10.239
+PRODUCT_PRODUCT_PROPERTIES += ro.bpf.program_kver_override=4.19.232
