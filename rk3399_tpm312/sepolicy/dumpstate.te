@@ -1,0 +1,8 @@
+# TPM312's userdebug-only tombstone service inherits stdout from init through
+# stdio_to_kmsg. Permit helper commands to inspect the inherited fd and write
+# bounded diagnostic lines to serial.
+userdebug_or_eng(`
+  allow dumpstate shell_exec:file entrypoint;
+  allow dumpstate kmsg_debug_device:chr_file { getattr ioctl write };
+  allowxperm dumpstate kmsg_debug_device:chr_file ioctl { 0x5401 };
+')

@@ -8,9 +8,8 @@
 # Rockchip product-type detection does not default to "tablet".
 TARGET_BOARD_PLATFORM_PRODUCT := box
 
-# Use the TPM312 fstab template: Android 16's shared Rockchip template enables
-# file and metadata encryption, whose fresh metadata-key generation crashes in
-# the vendor KeyMint. This product therefore leaves /data unencrypted.
+# Use the TPM312 fstab template so metadata encryption and FBE stay enabled
+# with this product's approved software-only KeyMint implementation.
 PRODUCT_FSTAB_TEMPLATE := device/rockchip/rk3399/rk3399_tpm312/fstab.in
 
 # Rockchip's prebuilt Mali DDK links against the VNDK-SP
@@ -30,6 +29,7 @@ KEEP_VNDK := true
 # override here because the shared Rockchip BSP defaults to permissive for
 # legacy boards that have not completed their policy migration.
 BOARD_SELINUX_ENFORCING := true
+BOARD_VENDOR_SEPOLICY_DIRS += device/rockchip/rk3399/rk3399_tpm312/sepolicy
 
 include device/rockchip/rk3399/BoardConfig.mk
 # Rockchip vendor policy owns the fuseblk label used by this BSP.

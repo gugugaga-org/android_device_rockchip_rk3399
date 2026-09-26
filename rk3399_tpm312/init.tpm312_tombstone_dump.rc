@@ -1,0 +1,10 @@
+# This userdebug-only monitor waits for init's updatable-crash signal. The
+# package is omitted from user builds; stdio_to_kmsg carries its bounded dump.
+service tpm312_tombstone_dump /system/bin/sh /system/etc/tpm312_tombstone_dump.sh
+    class main
+    user root
+    group root log
+    oneshot
+    timeout_period 180
+    seclabel u:r:dumpstate:s0
+    stdio_to_kmsg

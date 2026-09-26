@@ -68,6 +68,15 @@ WIFI_DRIVER_FW_PATH_STA := /dev/null
 WIFI_DRIVER_FW_PATH_AP := /dev/null
 WIFI_DRIVER_FW_PATH_P2P := /dev/null
 WIFI_DRIVER_FW_PATH_PARAM := /dev/null
+
+# Temporary userdebug-only diagnostic: forward the first system_server
+# tombstone and recent logcat buffer to the serial console if boot crashes.
+ifneq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_COPY_FILES += \
+    device/rockchip/rk3399/rk3399_tpm312/init.tpm312_tombstone_dump.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.tpm312_tombstone_dump.rc \
+    device/rockchip/rk3399/rk3399_tpm312/tpm312_tombstone_dump.sh:$(TARGET_COPY_OUT_SYSTEM)/etc/tpm312_tombstone_dump.sh
+endif
+
 # Android 14 builds libwifi-hal-common from Android.bp. Export the two
 # device-specific loader values through Soong without changing the generic
 # WiFi framework defaults for other boards.
