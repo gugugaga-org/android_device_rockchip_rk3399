@@ -207,6 +207,12 @@ PRODUCT_COPY_FILES += \
     device/rockchip/rk3399/rk3399_tpm312/bluetooth/bdaddr:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bdaddr
 PRODUCT_VENDOR_PROPERTIES += ro.bt.bdaddr_path=/vendor/etc/bluetooth/bdaddr
 
+# Do not enable vendor.hwc.enable_display_configs: the standard path exposes
+# every EDID mode to SurfaceFlinger, whose content detection flip-flops the
+# physical refresh rate (1080p60<->1080p25, a full VOP modeset each time), and
+# it disables the Rockchip persist.vendor.resolution path that the TvSettings
+# HDMI mode list relies on. Unset means false for both readers.
+
 # YICHIP (3151:3020) USB remote: map its OK key to DPAD_CENTER for Android TV.
 PRODUCT_COPY_FILES += \
     device/rockchip/rk3399/rk3399_tpm312/remote_config/Vendor_3151_Product_3020.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_3151_Product_3020.kl
