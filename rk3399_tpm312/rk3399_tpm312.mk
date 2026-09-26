@@ -227,3 +227,8 @@ PRODUCT_PROPERTY_OVERRIDES += ro.rk.screenoff_time=2147483647
 # Neither property is a claim that every 5.10 BPF feature is implemented.
 PRODUCT_PRODUCT_PROPERTIES += ro.bpf.kver_override=5.10.239
 PRODUCT_PRODUCT_PROPERTIES += ro.bpf.program_kver_override=4.19.232
+
+# TPM312 uses its YICHIP USB remote, not a Google Bluetooth remote. This
+# activates LineageGoogleSetupWraithPairingOverlay, which disables the
+# mandatory Bluetooth remote-pairing step in SetupWraith.
+PRODUCT_PRODUCT_PROPERTIES += atv.setup.bt_remote_pairing=false
